@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>DocQ · Ask your documents</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">DocQ<span>.</span></div>
+  <p class="sub">Ask questions about your PDFs. Every answer cites the page it came from.</p>
+  <p id="status" class="status" aria-live="polite">connecting…</p>
+</header>
+
+<main class="grid">
+  <section class="panel" aria-labelledby="docsH">
+    <h2 id="docsH">1 · Documents</h2>
+    <label class="drop" id="drop">
+      <input id="file" type="file" accept=".pdf,.txt,.md" multiple hidden>
+      <strong>Upload</strong> PDF, TXT or MD<br><small>or drop files here</small>
+    </label>
+    <button id="samples" class="ghost" type="button">Load the 5 sample documents</button>
+    <ul id="docs" class="docs"></ul>
+    <p id="docMsg" class="msg" role="status"></p>
+  </section>
+
+  <section class="panel" aria-labelledby="askH">
+    <h2 id="askH">2 · Ask</h2>
+    <form id="askForm" class="ask">
+      <input id="q" type="text" placeholder="e.g. How many leave days can be carried over?" maxlength="500" required aria-label="Your question">
+      <button type="submit">Ask</button>
+    </form>
+    <div id="out" class="out" aria-live="polite">
+      <p class="hint">Try: <a href="#" data-q="Within what time must a security incident be reported?">incident reporting time</a> ·
+        <a href="#" data-q="How long should I fast before a cholesterol test?">fasting before a test</a> ·
+        <a href="#" data-q="What does error code E3 mean?">error code E3</a></p>
+    </div>
+  </section>
+</main>
+<footer class="foot">Retrieval: <span id="retr">–</span> · Generator: <span id="gen">–</span></footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

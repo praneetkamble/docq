@@ -1,0 +1,960 @@
+{
+ "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+ "min_score": 0.25,
+ "chunk_words": 90,
+ "corpus": {
+  "documents": 5,
+  "pages": 18
+ },
+ "generator": "extractive",
+ "default_retriever": "hybrid",
+ "results": [
+  {
+   "retriever": "bm25",
+   "n_answerable": 25,
+   "n_out_of_scope": 5,
+   "hit@1": 0.84,
+   "hit@3": 0.92,
+   "hit@5": 0.96,
+   "MRR": 0.8957142857142857,
+   "citation_accuracy": 0.8,
+   "answer_contains_expected_fact": 0.6,
+   "cited_and_correct": 0.6,
+   "false_abstain_rate": 0.16,
+   "out_of_scope_abstained": "4/5",
+   "median_ask_latency_ms": 0.2
+  },
+  {
+   "retriever": "dense",
+   "n_answerable": 25,
+   "n_out_of_scope": 5,
+   "hit@1": 0.92,
+   "hit@3": 0.96,
+   "hit@5": 1.0,
+   "MRR": 0.95,
+   "citation_accuracy": 0.96,
+   "answer_contains_expected_fact": 0.92,
+   "cited_and_correct": 0.92,
+   "false_abstain_rate": 0.0,
+   "out_of_scope_abstained": "1/5",
+   "median_ask_latency_ms": 64.5
+  },
+  {
+   "retriever": "hybrid",
+   "n_answerable": 25,
+   "n_out_of_scope": 5,
+   "hit@1": 0.92,
+   "hit@3": 0.96,
+   "hit@5": 1.0,
+   "MRR": 0.9413333333333334,
+   "citation_accuracy": 0.96,
+   "answer_contains_expected_fact": 0.92,
+   "cited_and_correct": 0.92,
+   "false_abstain_rate": 0.0,
+   "out_of_scope_abstained": "1/5",
+   "median_ask_latency_ms": 59.1
+  }
+ ],
+ "details": {
+  "bm25": [
+   {
+    "q": "How many days a week can I work from home once my probation is over?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "During probation, remote work is limited to one day per week. [Meridian_Tech_Employee_Handbook, p.1]"
+   },
+   {
+    "q": "What monthly allowance do remote workers get for internet?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Remote workers receive an internet allowance of Rs 1,200 per month, paid with salary. [Meridian_Tech_Employee_Handbook, p.1]"
+   },
+   {
+    "q": "How many leave days can be carried over to next year?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Up to 10 unused days can be carried forward into the next calendar year; the rest lapse. [Meridian_Tech_Employee_Handbook, p.2]"
+   },
+   {
+    "q": "When do I need a doctor's note for sick leave?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Sick leave is 12 days per year. [Meridian_Tech_Employee_Handbook, p.2]"
+   },
+   {
+    "q": "Who has to approve an expense above 25,000 rupees?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Any single claim above Rs 25,000 needs approval from a director. [Meridian_Tech_Employee_Handbook, p.3]"
+   },
+   {
+    "q": "In which months are performance reviews held?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Performance and Conduct Performance reviews take place twice a year, in April and October, using a rating scale from 1 to 5. [Meridian_Tech_Employee_Handbook, p.4]"
+   },
+   {
+    "q": "How quickly does the Internal Committee respond to a harassment complaint?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Harassment complaints go to the Internal Committee, which acknowledges every complaint within 48 hours and concludes its inquiry within 90 days. [Meridian_Tech_Employee_Handbook, p.4]"
+   },
+   {
+    "q": "What is the minimum length for a password?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.1",
+    "rank": 1,
+    "cited": [],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": true,
+    "answer": "I could not find this in the uploaded documents."
+   },
+   {
+    "q": "How long is an account locked after too many wrong sign-ins?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Accounts are locked for 15 minutes after 5 failed sign-in attempts. [Meridian_Tech_Information_Security_Policy, p.1]"
+   },
+   {
+    "q": "What encryption standard must be used for restricted data stored on disk?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Restricted data must never be stored on laptops or USB drives. [Meridian_Tech_Information_Security_Policy, p.2]"
+   },
+   {
+    "q": "How long do we keep customer logs before deleting them?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Customer logs are retained for 13 months and then deleted. [Meridian_Tech_Information_Security_Policy, p.2]"
+   },
+   {
+    "q": "Within what time must a security incident be reported?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Incident Response Any suspected security incident must be reported to security@meridiantech.example within 1 hour of discovery. [Meridian_Tech_Information_Security_Policy, p.3]"
+   },
+   {
+    "q": "How soon must critical security patches be installed on laptops?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Critical security patches must be installed within 48 hours. [Meridian_Tech_Information_Security_Policy, p.4]"
+   },
+   {
+    "q": "How often should I change the carbon block in the water purifier?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.2",
+    "rank": 2,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.3"
+    ],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "A bad taste usually means the carbon block is exhausted. [AquaPure_W200_User_Manual, p.3]"
+   },
+   {
+    "q": "What does error code E3 mean?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Error code E3 indicates a fault in the TDS sensor. [AquaPure_W200_User_Manual, p.3]"
+   },
+   {
+    "q": "What is the capacity of the purifier's storage tank?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "The storage tank holds 8 litres and the purified water flow rate is 2.5 litres per minute. [AquaPure_W200_User_Manual, p.1]"
+   },
+   {
+    "q": "How long is the warranty on the AquaPure unit?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Warranty and Support The unit carries a 24-month warranty and filters are covered for 6 months. [AquaPure_W200_User_Manual, p.4]"
+   },
+   {
+    "q": "What are the Sunday opening hours at the clinic?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+    "rank": 2,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Hours and Appointments Sunrise Family Clinic is open Monday to Saturday from 8:00 to 20:00. [Sunrise_Family_Clinic_Patient_Guide, p.1]"
+   },
+   {
+    "q": "How much is the fee for cancelling an appointment late?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+    "rank": 4,
+    "cited": [],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": true,
+    "answer": "I could not find this in the uploaded documents."
+   },
+   {
+    "q": "Is there a discount for older patients?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Patients aged 60 and above get a 10 percent discount on consultation fees. [Sunrise_Family_Clinic_Patient_Guide, p.2]"
+   },
+   {
+    "q": "How long should I fast before a cholesterol test?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Blood test reports are ready within 24 hours. [Sunrise_Family_Clinic_Patient_Guide, p.3]"
+   },
+   {
+    "q": "How much is the flu shot?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.3",
+    "rank": 1,
+    "cited": [],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": true,
+    "answer": "I could not find this in the uploaded documents."
+   },
+   {
+    "q": "How much extra do I pay for a second parking space?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Greenfield_Apartments_Resident_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Each flat includes 1 car parking slot; a second slot costs Rs 1,500 per month. [Greenfield_Apartments_Resident_Handbook, p.3]"
+   },
+   {
+    "q": "Am I allowed to keep a pet dog in my flat?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Greenfield_Apartments_Resident_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Each flat may keep up to 2 pets, which must be registered with the office; dogs must be leashed in common areas. [Greenfield_Apartments_Resident_Handbook, p.3]"
+   },
+   {
+    "q": "How soon will someone come if my flat floods?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.2",
+    "rank": 7,
+    "cited": [],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": true,
+    "answer": "I could not find this in the uploaded documents."
+   }
+  ],
+  "dense": [
+   {
+    "q": "How many days a week can I work from home once my probation is over?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "During probation, remote work is limited to one day per week. [Meridian_Tech_Employee_Handbook, p.1] After completing the 90-day probation, employees may work remotely up to three days per week. [Meridian_Tech_Employee_Handbook, p.1]"
+   },
+   {
+    "q": "What monthly allowance do remote workers get for internet?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Remote workers receive an internet allowance of Rs 1,200 per month, paid with salary. [Meridian_Tech_Employee_Handbook, p.1]"
+   },
+   {
+    "q": "How many leave days can be carried over to next year?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Sick leave is 12 days per year. [Meridian_Tech_Employee_Handbook, p.2] Leave Policy Full-time employees accrue 24 days of paid leave per year, at two days per month. [Meridian_Tech_Employee_Handbook, p.2]"
+   },
+   {
+    "q": "When do I need a doctor's note for sick leave?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Sick leave is 12 days per year. [Meridian_Tech_Employee_Handbook, p.2] A medical certificate is required when the absence is longer than two consecutive days. [Meridian_Tech_Employee_Handbook, p.2]"
+   },
+   {
+    "q": "Who has to approve an expense above 25,000 rupees?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Any single claim above Rs 25,000 needs approval from a director. [Meridian_Tech_Employee_Handbook, p.3]"
+   },
+   {
+    "q": "In which months are performance reviews held?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Performance and Conduct Performance reviews take place twice a year, in April and October, using a rating scale from 1 to 5. [Meridian_Tech_Employee_Handbook, p.4]"
+   },
+   {
+    "q": "How quickly does the Internal Committee respond to a harassment complaint?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Harassment complaints go to the Internal Committee, which acknowledges every complaint within 48 hours and concludes its inquiry within 90 days. [Meridian_Tech_Employee_Handbook, p.4]"
+   },
+   {
+    "q": "What is the minimum length for a password?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Accounts and Passwords Passwords must be at least 14 characters long. [Meridian_Tech_Information_Security_Policy, p.1]"
+   },
+   {
+    "q": "How long is an account locked after too many wrong sign-ins?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Accounts are locked for 15 minutes after 5 failed sign-in attempts. [Meridian_Tech_Information_Security_Policy, p.1]"
+   },
+   {
+    "q": "What encryption standard must be used for restricted data stored on disk?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Restricted data, such as customer payment details and health records, must be encrypted with AES-256 at rest and with TLS 1.2 or higher in transit. [Meridian_Tech_Information_Security_Policy, p.2] Restricted data must never be stored on laptops or USB drives. [Meridian_Tech_Information_Security_Policy, p.2]"
+   },
+   {
+    "q": "How long do we keep customer logs before deleting them?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Customer logs are retained for 13 months and then deleted. [Meridian_Tech_Information_Security_Policy, p.2]"
+   },
+   {
+    "q": "Within what time must a security incident be reported?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Incident Response Any suspected security incident must be reported to security@meridiantech.example within 1 hour of discovery. [Meridian_Tech_Information_Security_Policy, p.3]"
+   },
+   {
+    "q": "How soon must critical security patches be installed on laptops?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Critical security patches must be installed within 48 hours. [Meridian_Tech_Information_Security_Policy, p.4]"
+   },
+   {
+    "q": "How often should I change the carbon block in the water purifier?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Replace the sediment pre-filter every 6 months, the carbon block every 12 months and the RO membrane every 24 months. [AquaPure_W200_User_Manual, p.2]"
+   },
+   {
+    "q": "What does error code E3 mean?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Error code E3 indicates a fault in the TDS sensor. [AquaPure_W200_User_Manual, p.3]"
+   },
+   {
+    "q": "What is the capacity of the purifier's storage tank?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "The storage tank holds 8 litres and the purified water flow rate is 2.5 litres per minute. [AquaPure_W200_User_Manual, p.1]"
+   },
+   {
+    "q": "How long is the warranty on the AquaPure unit?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Warranty and Support The unit carries a 24-month warranty and filters are covered for 6 months. [AquaPure_W200_User_Manual, p.4] Customer support is available from 9 am to 6 pm, Monday to Saturday, on 1800-000-0142 or at support@aquapure.example. [AquaPure_W200_User_Manual, p.4]"
+   },
+   {
+    "q": "What are the Sunday opening hours at the clinic?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Hours and Appointments Sunrise Family Clinic is open Monday to Saturday from 8:00 to 20:00. [Sunrise_Family_Clinic_Patient_Guide, p.1] On Sundays only emergency consultations are available, from 10:00 to 14:00. [Sunrise_Family_Clinic_Patient_Guide, p.1]"
+   },
+   {
+    "q": "How much is the fee for cancelling an appointment late?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+    "rank": 2,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Please cancel at least 4 hours in advance; later cancellations are charged a fee of Rs 300. [Sunrise_Family_Clinic_Patient_Guide, p.1] Billing and Insurance The consultation fee is Rs 600 for a general physician and Rs 900 for a specialist. [Sunrise_Family_Clinic_Patient_Guide, p.2]"
+   },
+   {
+    "q": "Is there a discount for older patients?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Patients aged 60 and above get a 10 percent discount on consultation fees. [Sunrise_Family_Clinic_Patient_Guide, p.2]"
+   },
+   {
+    "q": "How long should I fast before a cholesterol test?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Tests and Vaccinations Fasting for 10 to 12 hours is required before blood glucose and lipid profile tests; plain water is allowed. [Sunrise_Family_Clinic_Patient_Guide, p.3]"
+   },
+   {
+    "q": "How much is the flu shot?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "The seasonal flu vaccine is available from October to January and costs Rs 850. [Sunrise_Family_Clinic_Patient_Guide, p.3]"
+   },
+   {
+    "q": "How much extra do I pay for a second parking space?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Greenfield_Apartments_Resident_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Each flat includes 1 car parking slot; a second slot costs Rs 1,500 per month. [Greenfield_Apartments_Resident_Handbook, p.3] Visitor parking is free for 4 hours and then Rs 50 per hour. [Greenfield_Apartments_Resident_Handbook, p.3]"
+   },
+   {
+    "q": "Am I allowed to keep a pet dog in my flat?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Greenfield_Apartments_Resident_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Each flat may keep up to 2 pets, which must be registered with the office; dogs must be leashed in common areas. [Greenfield_Apartments_Resident_Handbook, p.3]"
+   },
+   {
+    "q": "How soon will someone come if my flat floods?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.2",
+    "rank": 4,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.1"
+    ],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "On Sundays only emergency consultations are available, from 10:00 to 14:00. [Sunrise_Family_Clinic_Patient_Guide, p.1] Arrive 10 minutes before your slot. [Sunrise_Family_Clinic_Patient_Guide, p.1]"
+   }
+  ],
+  "hybrid": [
+   {
+    "q": "How many days a week can I work from home once my probation is over?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "During probation, remote work is limited to one day per week. [Meridian_Tech_Employee_Handbook, p.1] After completing the 90-day probation, employees may work remotely up to three days per week. [Meridian_Tech_Employee_Handbook, p.1]"
+   },
+   {
+    "q": "What monthly allowance do remote workers get for internet?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Remote workers receive an internet allowance of Rs 1,200 per month, paid with salary. [Meridian_Tech_Employee_Handbook, p.1]"
+   },
+   {
+    "q": "How many leave days can be carried over to next year?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Sick leave is 12 days per year. [Meridian_Tech_Employee_Handbook, p.2] Leave Policy Full-time employees accrue 24 days of paid leave per year, at two days per month. [Meridian_Tech_Employee_Handbook, p.2]"
+   },
+   {
+    "q": "When do I need a doctor's note for sick leave?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Sick leave is 12 days per year. [Meridian_Tech_Employee_Handbook, p.2] A medical certificate is required when the absence is longer than two consecutive days. [Meridian_Tech_Employee_Handbook, p.2]"
+   },
+   {
+    "q": "Who has to approve an expense above 25,000 rupees?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Any single claim above Rs 25,000 needs approval from a director. [Meridian_Tech_Employee_Handbook, p.3]"
+   },
+   {
+    "q": "In which months are performance reviews held?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Performance and Conduct Performance reviews take place twice a year, in April and October, using a rating scale from 1 to 5. [Meridian_Tech_Employee_Handbook, p.4]"
+   },
+   {
+    "q": "How quickly does the Internal Committee respond to a harassment complaint?",
+    "gold": "Meridian_Tech_Employee_Handbook.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Employee_Handbook.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Harassment complaints go to the Internal Committee, which acknowledges every complaint within 48 hours and concludes its inquiry within 90 days. [Meridian_Tech_Employee_Handbook, p.4]"
+   },
+   {
+    "q": "What is the minimum length for a password?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Accounts and Passwords Passwords must be at least 14 characters long. [Meridian_Tech_Information_Security_Policy, p.1]"
+   },
+   {
+    "q": "How long is an account locked after too many wrong sign-ins?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Accounts are locked for 15 minutes after 5 failed sign-in attempts. [Meridian_Tech_Information_Security_Policy, p.1]"
+   },
+   {
+    "q": "What encryption standard must be used for restricted data stored on disk?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Restricted data, such as customer payment details and health records, must be encrypted with AES-256 at rest and with TLS 1.2 or higher in transit. [Meridian_Tech_Information_Security_Policy, p.2] Restricted data must never be stored on laptops or USB drives. [Meridian_Tech_Information_Security_Policy, p.2]"
+   },
+   {
+    "q": "How long do we keep customer logs before deleting them?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Customer logs are retained for 13 months and then deleted. [Meridian_Tech_Information_Security_Policy, p.2]"
+   },
+   {
+    "q": "Within what time must a security incident be reported?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Incident Response Any suspected security incident must be reported to security@meridiantech.example within 1 hour of discovery. [Meridian_Tech_Information_Security_Policy, p.3]"
+   },
+   {
+    "q": "How soon must critical security patches be installed on laptops?",
+    "gold": "Meridian_Tech_Information_Security_Policy.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "Meridian_Tech_Information_Security_Policy.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Critical security patches must be installed within 48 hours. [Meridian_Tech_Information_Security_Policy, p.4]"
+   },
+   {
+    "q": "How often should I change the carbon block in the water purifier?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Replace the sediment pre-filter every 6 months, the carbon block every 12 months and the RO membrane every 24 months. [AquaPure_W200_User_Manual, p.2]"
+   },
+   {
+    "q": "What does error code E3 mean?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Error code E3 indicates a fault in the TDS sensor. [AquaPure_W200_User_Manual, p.3]"
+   },
+   {
+    "q": "What is the capacity of the purifier's storage tank?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "The storage tank holds 8 litres and the purified water flow rate is 2.5 litres per minute. [AquaPure_W200_User_Manual, p.1]"
+   },
+   {
+    "q": "How long is the warranty on the AquaPure unit?",
+    "gold": "AquaPure_W200_User_Manual.pdf p.4",
+    "rank": 1,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.4"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Warranty and Support The unit carries a 24-month warranty and filters are covered for 6 months. [AquaPure_W200_User_Manual, p.4] Customer support is available from 9 am to 6 pm, Monday to Saturday, on 1800-000-0142 or at support@aquapure.example. [AquaPure_W200_User_Manual, p.4]"
+   },
+   {
+    "q": "What are the Sunday opening hours at the clinic?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.1"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Hours and Appointments Sunrise Family Clinic is open Monday to Saturday from 8:00 to 20:00. [Sunrise_Family_Clinic_Patient_Guide, p.1] On Sundays only emergency consultations are available, from 10:00 to 14:00. [Sunrise_Family_Clinic_Patient_Guide, p.1]"
+   },
+   {
+    "q": "How much is the fee for cancelling an appointment late?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+    "rank": 3,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.1",
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Please cancel at least 4 hours in advance; later cancellations are charged a fee of Rs 300. [Sunrise_Family_Clinic_Patient_Guide, p.1] Billing and Insurance The consultation fee is Rs 600 for a general physician and Rs 900 for a specialist. [Sunrise_Family_Clinic_Patient_Guide, p.2]"
+   },
+   {
+    "q": "Is there a discount for older patients?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.2",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.2"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Patients aged 60 and above get a 10 percent discount on consultation fees. [Sunrise_Family_Clinic_Patient_Guide, p.2]"
+   },
+   {
+    "q": "How long should I fast before a cholesterol test?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Tests and Vaccinations Fasting for 10 to 12 hours is required before blood glucose and lipid profile tests; plain water is allowed. [Sunrise_Family_Clinic_Patient_Guide, p.3]"
+   },
+   {
+    "q": "How much is the flu shot?",
+    "gold": "Sunrise_Family_Clinic_Patient_Guide.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Sunrise_Family_Clinic_Patient_Guide.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "The seasonal flu vaccine is available from October to January and costs Rs 850. [Sunrise_Family_Clinic_Patient_Guide, p.3]"
+   },
+   {
+    "q": "How much extra do I pay for a second parking space?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Greenfield_Apartments_Resident_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Each flat includes 1 car parking slot; a second slot costs Rs 1,500 per month. [Greenfield_Apartments_Resident_Handbook, p.3] Visitor parking is free for 4 hours and then Rs 50 per hour. [Greenfield_Apartments_Resident_Handbook, p.3]"
+   },
+   {
+    "q": "Am I allowed to keep a pet dog in my flat?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.3",
+    "rank": 1,
+    "cited": [
+     "Greenfield_Apartments_Resident_Handbook.pdf p.3"
+    ],
+    "citation_ok": true,
+    "answer_has_fact": true,
+    "abstained": false,
+    "answer": "Each flat may keep up to 2 pets, which must be registered with the office; dogs must be leashed in common areas. [Greenfield_Apartments_Resident_Handbook, p.3]"
+   },
+   {
+    "q": "How soon will someone come if my flat floods?",
+    "gold": "Greenfield_Apartments_Resident_Handbook.pdf p.2",
+    "rank": 5,
+    "cited": [
+     "AquaPure_W200_User_Manual.pdf p.4"
+    ],
+    "citation_ok": false,
+    "answer_has_fact": false,
+    "abstained": false,
+    "answer": "Customer support is available from 9 am to 6 pm, Monday to Saturday, on 1800-000-0142 or at support@aquapure.example. [AquaPure_W200_User_Manual, p.4] The warranty does not cover damage caused by supply water with more than 1500 ppm TDS. [AquaPure_W200_User_Manual, p.4]"
+   }
+  ]
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "description": "Test set: 25 answerable questions (gold = document + page) and 5 out-of-scope questions. Written by the project author AFTER writing the sample documents.",
+ "answerable": [
+  {
+   "question": "How many days a week can I work from home once my probation is over?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 1,
+   "must_contain": [
+    "three days"
+   ]
+  },
+  {
+   "question": "What monthly allowance do remote workers get for internet?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 1,
+   "must_contain": [
+    "1,200"
+   ]
+  },
+  {
+   "question": "How many leave days can be carried over to next year?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 2,
+   "must_contain": [
+    "10 unused days"
+   ]
+  },
+  {
+   "question": "When do I need a doctor's note for sick leave?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 2,
+   "must_contain": [
+    "two consecutive days"
+   ]
+  },
+  {
+   "question": "Who has to approve an expense above 25,000 rupees?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 3,
+   "must_contain": [
+    "director"
+   ]
+  },
+  {
+   "question": "In which months are performance reviews held?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 4,
+   "must_contain": [
+    "April and October"
+   ]
+  },
+  {
+   "question": "How quickly does the Internal Committee respond to a harassment complaint?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 4,
+   "must_contain": [
+    "48 hours"
+   ]
+  },
+  {
+   "question": "What is the minimum length for a password?",
+   "doc": "Meridian_Tech_Information_Security_Policy.pdf",
+   "page": 1,
+   "must_contain": [
+    "14 characters"
+   ]
+  },
+  {
+   "question": "How long is an account locked after too many wrong sign-ins?",
+   "doc": "Meridian_Tech_Information_Security_Policy.pdf",
+   "page": 1,
+   "must_contain": [
+    "15 minutes"
+   ]
+  },
+  {
+   "question": "What encryption standard must be used for restricted data stored on disk?",
+   "doc": "Meridian_Tech_Information_Security_Policy.pdf",
+   "page": 2,
+   "must_contain": [
+    "AES-256"
+   ]
+  },
+  {
+   "question": "How long do we keep customer logs before deleting them?",
+   "doc": "Meridian_Tech_Information_Security_Policy.pdf",
+   "page": 2,
+   "must_contain": [
+    "13 months"
+   ]
+  },
+  {
+   "question": "Within what time must a security incident be reported?",
+   "doc": "Meridian_Tech_Information_Security_Policy.pdf",
+   "page": 3,
+   "must_contain": [
+    "1 hour"
+   ]
+  },
+  {
+   "question": "How soon must critical security patches be installed on laptops?",
+   "doc": "Meridian_Tech_Information_Security_Policy.pdf",
+   "page": 4,
+   "must_contain": [
+    "48 hours"
+   ]
+  },
+  {
+   "question": "How often should I change the carbon block in the water purifier?",
+   "doc": "AquaPure_W200_User_Manual.pdf",
+   "page": 2,
+   "must_contain": [
+    "12 months"
+   ]
+  },
+  {
+   "question": "What does error code E3 mean?",
+   "doc": "AquaPure_W200_User_Manual.pdf",
+   "page": 3,
+   "must_contain": [
+    "TDS sensor"
+   ]
+  },
+  {
+   "question": "What is the capacity of the purifier's storage tank?",
+   "doc": "AquaPure_W200_User_Manual.pdf",
+   "page": 1,
+   "must_contain": [
+    "8 litres"
+   ]
+  },
+  {
+   "question": "How long is the warranty on the AquaPure unit?",
+   "doc": "AquaPure_W200_User_Manual.pdf",
+   "page": 4,
+   "must_contain": [
+    "24-month"
+   ]
+  },
+  {
+   "question": "What are the Sunday opening hours at the clinic?",
+   "doc": "Sunrise_Family_Clinic_Patient_Guide.pdf",
+   "page": 1,
+   "must_contain": [
+    "10:00 to 14:00"
+   ]
+  },
+  {
+   "question": "How much is the fee for cancelling an appointment late?",
+   "doc": "Sunrise_Family_Clinic_Patient_Guide.pdf",
+   "page": 1,
+   "must_contain": [
+    "Rs 300"
+   ]
+  },
+  {
+   "question": "Is there a discount for older patients?",
+   "doc": "Sunrise_Family_Clinic_Patient_Guide.pdf",
+   "page": 2,
+   "must_contain": [
+    "10 percent"
+   ]
+  },
+  {
+   "question": "How long should I fast before a cholesterol test?",
+   "doc": "Sunrise_Family_Clinic_Patient_Guide.pdf",
+   "page": 3,
+   "must_contain": [
+    "10 to 12 hours"
+   ]
+  },
+  {
+   "question": "How much is the flu shot?",
+   "doc": "Sunrise_Family_Clinic_Patient_Guide.pdf",
+   "page": 3,
+   "must_contain": [
+    "Rs 850"
+   ]
+  },
+  {
+   "question": "How much extra do I pay for a second parking space?",
+   "doc": "Greenfield_Apartments_Resident_Handbook.pdf",
+   "page": 3,
+   "must_contain": [
+    "Rs 1,500"
+   ]
+  },
+  {
+   "question": "Am I allowed to keep a pet dog in my flat?",
+   "doc": "Greenfield_Apartments_Resident_Handbook.pdf",
+   "page": 3,
+   "must_contain": [
+    "2 pets",
+    "leashed"
+   ]
+  },
+  {
+   "question": "How soon will someone come if my flat floods?",
+   "doc": "Greenfield_Apartments_Resident_Handbook.pdf",
+   "page": 2,
+   "must_contain": [
+    "4 hours"
+   ]
+  }
+ ],
+ "out_of_scope": [
+  "How many floors does the Greenfield building have?",
+  "What is Meridian Tech's stock ticker symbol?",
+  "Does the clinic perform dental surgery?",
+  "What is the retail price of the AquaPure W200?",
+  "Who won the 2022 football world cup?"
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "description": "Separate dev set used only to pick the abstention threshold.",
+ "answerable": [
+  {
+   "question": "How many days of bereavement leave do employees get?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 2,
+   "must_contain": [
+    "5 days"
+   ]
+  },
+  {
+   "question": "What power adapter does the purifier use?",
+   "doc": "AquaPure_W200_User_Manual.pdf",
+   "page": 1,
+   "must_contain": [
+    "24 V DC"
+   ]
+  },
+  {
+   "question": "Can I pay the clinic by card?",
+   "doc": "Sunrise_Family_Clinic_Patient_Guide.pdf",
+   "page": 2,
+   "must_contain": [
+    "card"
+   ]
+  },
+  {
+   "question": "What is the notice period during probation?",
+   "doc": "Meridian_Tech_Employee_Handbook.pdf",
+   "page": 4,
+   "must_contain": [
+    "30 days"
+   ]
+  },
+  {
+   "question": "How often are the lifts serviced?",
+   "doc": "Greenfield_Apartments_Resident_Handbook.pdf",
+   "page": 2,
+   "must_contain": [
+    "monthly"
+   ]
+  }
+ ],
+ "out_of_scope": [
+  "What is the capital of France?",
+  "How much does the Meridian CEO earn?",
+  "Does the clinic have a pharmacy on site?"
+ ]
+}
