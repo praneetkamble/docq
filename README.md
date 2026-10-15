@@ -1,49 +1,70 @@
-# DocQ — document Q&A with retrieval-augmented generation (RAG)
+# DocQ
 
-Upload PDFs / text files, ask a question in plain language, get an answer **with page-level citations**
-and the retrieved passages shown next to it. Runs fully locally and free: no API key needed.
+### Document Q&A with retrieval-augmented generation and page-level citations
 
-> **Status:** working demo built as a portfolio project. The GitHub repo `praneetkamble/docq`
-> **has not been created yet**; this folder is the source. Nothing here is deployed.
+![Python](https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?logo=fastapi&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-15%20passing-2ea44f)
+![Runs locally](https://img.shields.io/badge/runs-locally%2C%20no%20API%20key-555555)
 
-## What is actually used
+DocQ lets you upload PDFs or text files, ask a question in plain language, and get an answer **with page-level citations**, with the retrieved passages shown next to it. It runs fully locally and free: no API key is needed.
 
-| Piece | What it is |
-|---|---|
-| Backend | FastAPI (`docq/api.py`) |
-| PDF text | `pypdf`, page by page (so a citation is a real PDF page number) |
-| Chunking | sentence-aligned chunks of ≤ 90 words, 1-sentence overlap, never crossing a page |
-| Embeddings | **`sentence-transformers/all-MiniLM-L6-v2`** (384-dim, runs on CPU), with a file-name context header on each chunk |
-| Vector search | **FAISS** `IndexFlatIP` (exact cosine search); falls back to numpy if FAISS is missing |
-| Sparse search | own BM25 implementation (no dependency) |
-| Retrieval modes | `dense`, `bm25`, `hybrid` (reciprocal-rank fusion). `auto` = hybrid, or BM25 only if `sentence-transformers` is not installed |
-| Answering (default) | **Extractive**: the best 1–2 sentences from the top retrieved chunks, each tagged `[document, p.N]`. No generative model is involved by default |
-| Answering (optional LLM) | Set `DOCQ_LLM_BASE_URL` + `DOCQ_LLM_MODEL` (+ `DOCQ_LLM_API_KEY`) for any OpenAI-compatible `/chat/completions` endpoint (OpenAI, Ollama, llama.cpp, vLLM…). The LLM only sees the retrieved passages and must cite `[n]`; if it fails, DocQ falls back to extractive |
-| Abstention | If the best cosine similarity is below `DOCQ_MIN_SCORE` (0.25) it says it cannot find the answer |
-| Frontend | plain HTML/CSS/JS in `frontend/` (upload, ask, cited sources) |
+![DocQ demo: loading the sample documents and asking three questions](docs/demo.gif)
 
-**Honesty notes:** the LLM path is covered by tests with a *mocked* endpoint only. I have **not** run it against a real
-model, so no quality numbers exist for it. All numbers below are for the extractive mode.
+---
 
-## Run it
+## ✨ Key features
 
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt          # downloads CPU torch + the ~90 MB MiniLM model on first use
-uvicorn docq.api:app --port 8000          # open http://localhost:8000 and press "Load the 5 sample documents"
+- **Cited answers.** Every answer sentence is tagged `[document, p.N]`, and PDFs are read page by page, so a citation is a real PDF page number.
+- **Hybrid retrieval.** Dense search (MiniLM embeddings with FAISS) and BM25 are combined with reciprocal-rank fusion. `dense`, `bm25` and `hybrid` modes are all available.
+- **Transparent sources.** The retrieved passages are listed with similarity scores, and the cited passage is highlighted.
+- **Abstention.** If the best cosine similarity is below `DOCQ_MIN_SCORE` (0.25), DocQ says it cannot find the answer. See the evaluation and Limitations for how well this works.
+- **Extractive by default.** Answers are sentences copied from the source pages, so no generative model is involved unless you configure one.
+- **Optional LLM step.** Any OpenAI-compatible `/chat/completions` endpoint (OpenAI, Ollama, llama.cpp, vLLM and others) can be used. The model only sees the retrieved passages and must cite `[n]`. If it fails, DocQ falls back to extractive answers.
+- **Reproducible evaluation.** A labelled question set and a script (`eval/run_eval.py`) regenerate the numbers below.
+
+---
+
+## 🏗️ How it works
+
+```mermaid
+flowchart LR
+    U["Upload PDF / TXT / MD"] --> P["Page-level text extraction (pypdf)"]
+    P --> C["Sentence-aligned chunks<br/>max 90 words, 1-sentence overlap"]
+    C --> E["Embeddings<br/>all-MiniLM-L6-v2"]
+    E --> F[("FAISS index<br/>exact cosine")]
+    C --> B[("BM25 index")]
+    Q["Question"] --> R{{"Hybrid retrieval<br/>reciprocal-rank fusion"}}
+    F --> R
+    B --> R
+    R --> G{"Best similarity<br/>above threshold?"}
+    G -- no --> A0["Abstain: cannot find the answer"]
+    G -- yes --> A1["Extractive answer<br/>or optional LLM, citations required"]
+    A1 --> O["Answer + cited pages + retrieved passages"]
 ```
 
-```bash
-# optional LLM generation (example: local Ollama)
-export DOCQ_LLM_BASE_URL=http://localhost:11434/v1 DOCQ_LLM_MODEL=llama3.1:8b
-```
+---
 
-Docker: `docker build -t docq . && docker run -p 8000:8000 docq`
-(the Dockerfile is written but **I could not build it here, Docker is not installed on my machine**, so it is untested).
+## 📷 Screenshots
 
-API: `GET /api/health`, `GET/POST /api/documents`, `DELETE /api/documents/{name}`, `POST /api/load-samples`, `POST /api/ask {"question": "..."}`.
+### 1. Empty workspace
+![Empty workspace](docs/01-empty.png)
 
-## Evaluation (measured, reproducible: `python eval/run_eval.py`)
+### 2. Sample documents loaded
+![Sample documents loaded](docs/02-documents-loaded.png)
+
+### 3. Cited answer: security incident reporting
+![Answer with citation to page 3 of the security policy](docs/03-answer-1.png)
+
+### 4. Cited answer: fasting before a test
+![Answer with citation from the clinic patient guide](docs/04-answer-2.png)
+
+### 5. Cited answer: error code lookup
+![Answer with citation to the water purifier manual](docs/05-answer-3.png)
+
+---
+
+## 📊 Evaluation (measured, reproducible: `python eval/run_eval.py`)
 
 **Measured on my test set of 25 answerable questions** (+ 5 out-of-scope questions), over **5 fictional documents / 18 pages**
 that I wrote myself (`sample_docs/`, regenerated by `scripts/make_sample_docs.py`). Gold label for each question = the
@@ -64,15 +85,89 @@ Failures (kept in, not hidden):
 - "How many leave days can be carried over…" — right page cited, but the extractive sentence picker chose "Sick leave is 12 days…" instead of the carry-forward sentence.
 - **Out-of-scope questions are mostly NOT rejected**: the dense/hybrid abstention caught only 1 of 5 (questions that are on-topic but absent, like "How many floors does the building have?", still score a similarity above the threshold). BM25's stricter rule caught 4/5 but wrongly refused 16% of valid questions. A real system needs an LLM or a reranker/NLI check for this.
 
-## Limitations
+---
+
+## 🧩 Tech stack
+
+| Piece | What it is |
+|---|---|
+| Backend | FastAPI (`docq/api.py`) |
+| PDF text | `pypdf`, page by page (so a citation is a real PDF page number) |
+| Chunking | sentence-aligned chunks of ≤ 90 words, 1-sentence overlap, never crossing a page |
+| Embeddings | **`sentence-transformers/all-MiniLM-L6-v2`** (384-dim, runs on CPU), with a file-name context header on each chunk |
+| Vector search | **FAISS** `IndexFlatIP` (exact cosine search); falls back to numpy if FAISS is missing |
+| Sparse search | own BM25 implementation (no dependency) |
+| Retrieval modes | `dense`, `bm25`, `hybrid` (reciprocal-rank fusion). `auto` = hybrid, or BM25 only if `sentence-transformers` is not installed |
+| Answering (default) | **Extractive**: the best 1–2 sentences from the top retrieved chunks, each tagged `[document, p.N]`. No generative model is involved by default |
+| Answering (optional LLM) | Set `DOCQ_LLM_BASE_URL` + `DOCQ_LLM_MODEL` (+ `DOCQ_LLM_API_KEY`) for any OpenAI-compatible `/chat/completions` endpoint (OpenAI, Ollama, llama.cpp, vLLM…). The LLM only sees the retrieved passages and must cite `[n]`; if it fails, DocQ falls back to extractive |
+| Abstention | If the best cosine similarity is below `DOCQ_MIN_SCORE` (0.25) it says it cannot find the answer |
+| Frontend | plain HTML/CSS/JS in `frontend/` (upload, ask, cited sources) |
+
+**Honesty notes:** the LLM path is covered by tests with a *mocked* endpoint only. I have **not** run it against a real model, so no quality numbers exist for it. All numbers above are for the extractive mode.
+
+---
+
+## 📂 Project structure
+
+```text
+docq/
+├── docq/
+│   ├── api.py            # FastAPI app and routes
+│   ├── service.py        # document store and ask pipeline
+│   ├── ingest.py         # PDF/text extraction and chunking
+│   ├── retrieval.py      # BM25, dense (FAISS) and hybrid retrieval
+│   ├── answer.py         # extractive answering and abstention
+│   ├── llm.py            # optional OpenAI-compatible generation
+│   └── config.py         # configuration from environment variables
+├── frontend/             # plain HTML/CSS/JS interface
+├── sample_docs/          # 5 fictional PDFs used by the demo and evaluation
+├── eval/                 # question sets, run_eval.py, results.json, RESULTS.md
+├── scripts/
+│   └── make_sample_docs.py
+├── tests/                # pytest suite
+├── docs/                 # screenshots and demo GIF
+├── Dockerfile
+├── requirements.txt
+└── requirements-dev.txt
+```
+
+---
+
+## 🚀 Getting started
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt          # downloads CPU torch + the ~90 MB MiniLM model on first use
+uvicorn docq.api:app --port 8000          # open http://localhost:8000 and press "Load the 5 sample documents"
+```
+
+Optional LLM generation (example: local Ollama):
+
+```bash
+export DOCQ_LLM_BASE_URL=http://localhost:11434/v1 DOCQ_LLM_MODEL=llama3.1:8b
+```
+
+Docker: `docker build -t docq . && docker run -p 8000:8000 docq`
+(the Dockerfile is written but **I could not build it here, Docker is not installed on my machine**, so it is untested).
+
+API: `GET /api/health`, `GET/POST /api/documents`, `DELETE /api/documents/{name}`, `POST /api/load-samples`, `POST /api/ask {"question": "..."}`.
+
+---
+
+## 🧪 Tests
+
+```bash
+pip install -r requirements-dev.txt && python -m pytest -q
+```
+
+The 15 tests cover PDF pages, chunking, BM25, dense and hybrid retrieval, the fallback path, extractive answers, abstention, the mocked LLM path and the API.
+
+---
+
+## ⚠️ Limitations
 
 - Small, author-written, fairly clean corpus and questions written by the same author: expect lower numbers on real, messy documents. 25 questions is too few for tight confidence intervals (one question = 4 points).
 - Extractive answers are sentences copied from the page, not synthesised; multi-sentence reasoning needs the optional LLM step.
 - Page headings are merged into the first sentence of a page (PDF layout isn't parsed), which looks untidy in answers.
 - No OCR (scanned PDFs are rejected), no tables, in-memory index (lost on restart), no auth, no multi-user isolation.
 
-## Tests
-
-```bash
-pip install -r requirements-dev.txt && python -m pytest -q     # 15 tests: PDF pages, chunking, BM25, dense, hybrid, fallback, extractive, abstain, mocked LLM, API
-```
