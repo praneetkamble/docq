@@ -34,6 +34,14 @@ def test_chunks_keep_page_and_never_cross_pages():
             assert c.text in pages[c.page - 1]
 
 
+def test_text_file_utf8_bom_is_stripped():
+    # Notepad and Excel often save UTF-8 with a BOM; it must not leak into the first chunk.
+    data = "\ufeffRefunds are issued within 14 days.\n\nContact support for help.".encode("utf-8")
+    pages = extract_pages("policy.txt", data)
+    assert pages[0].startswith("Refunds")
+    assert "\ufeff" not in chunk_document("policy.txt", pages)[0].text
+
+
 def test_chunk_size_and_overlap():
     text = " ".join(f"Sentence number {i} has exactly seven words." for i in range(30))
     ch = chunk_page("d.txt", 1, text, max_words=40)

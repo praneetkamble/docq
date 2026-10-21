@@ -44,7 +44,7 @@ def extract_pages(filename: str, data: bytes) -> list[str]:
         from pypdf import PdfReader
         reader = PdfReader(io.BytesIO(data))
         return [clean(p.extract_text() or "") for p in reader.pages]
-    text = data.decode("utf-8", errors="replace")
+    text = data.decode("utf-8-sig", errors="replace")   # -sig drops a leading BOM
     if "\f" in text:
         return [clean(p) for p in text.split("\f")]
     pages, cur = [], ""
