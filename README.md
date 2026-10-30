@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.12%2B-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688?logo=fastapi&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-15%20passing-2ea44f)
+![Tests](https://img.shields.io/badge/tests-17%20passing-2ea44f)
 ![Runs locally](https://img.shields.io/badge/runs-locally%2C%20no%20API%20key-555555)
 
 DocQ lets you upload PDFs or text files, ask a question in plain language, and get an answer **with page-level citations**, with the retrieved passages shown next to it. It runs fully locally and free: no API key is needed.

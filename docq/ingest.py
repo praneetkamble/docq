@@ -36,6 +36,15 @@ def split_sentences(text: str) -> list[str]:
     return [s.strip() for s in _SENT.split(text) if s.strip()]
 
 
+def _split_long(sentence: str, max_words: int) -> list[str]:
+    """Break a run-on 'sentence' (e.g. a bullet list or table with no full stops)
+    into pieces of at most max_words, so no chunk silently grows past the limit."""
+    words = sentence.split()
+    if len(words) <= max_words:
+        return [sentence]
+    return [" ".join(words[i:i + max_words]) for i in range(0, len(words), max_words)]
+
+
 def extract_pages(filename: str, data: bytes) -> list[str]:
     """Return one string per page. PDFs use real pages; text files are paged by form-feed
     or, failing that, every ~2500 characters at a paragraph boundary."""
@@ -60,13 +69,15 @@ def extract_pages(filename: str, data: bytes) -> list[str]:
 def chunk_page(doc: str, page: int, text: str, max_words: int = 90) -> list[Chunk]:
     """Sentence-aligned chunks of <= max_words with a one-sentence overlap.
     Chunks never cross a page boundary."""
-    sents = split_sentences(text)
+    sents = [p for s in split_sentences(text) for p in _split_long(s, max_words)]
     chunks, cur, n = [], [], 0
     for s in sents:
         w = len(s.split())
         if cur and n + w > max_words:
             chunks.append(" ".join(cur))
-            cur, n = cur[-1:], len(cur[-1].split())      # overlap: carry last sentence
+            last = len(cur[-1].split())
+            # overlap: carry the last sentence, unless that alone would overflow the next chunk
+            cur, n = (cur[-1:], last) if last + w <= max_words else ([], 0)
         cur.append(s); n += w
     if cur and (not chunks or " ".join(cur) != chunks[-1]):
         chunks.append(" ".join(cur))

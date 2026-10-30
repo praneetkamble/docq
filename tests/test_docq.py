@@ -49,6 +49,14 @@ def test_chunk_size_and_overlap():
     assert ch[0].text.split(". ")[-1] in ch[1].text          # one-sentence overlap
 
 
+def test_run_on_text_without_punctuation_is_still_chunked():
+    # Bullet lists / tables extracted from PDFs often have no full stops at all.
+    text = " ".join(f"item{i}" for i in range(400))
+    ch = chunk_page("d.txt", 1, text, max_words=90)
+    assert len(ch) >= 5 and all(len(c.text.split()) <= 90 for c in ch)
+    assert "item0" in ch[0].text and "item399" in ch[-1].text
+
+
 def test_split_sentences():
     assert len(split_sentences("Rent is Rs 5.5k. Pay by the 5th. Done!")) == 3
 
