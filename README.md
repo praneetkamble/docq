@@ -160,7 +160,7 @@ API: `GET /api/health`, `GET/POST /api/documents`, `DELETE /api/documents/{name}
 pip install -r requirements-dev.txt && python -m pytest -q
 ```
 
-The 15 tests cover PDF pages, chunking, BM25, dense and hybrid retrieval, the fallback path, extractive answers, abstention, the mocked LLM path and the API.
+The 17 tests cover PDF pages, chunking (including BOM and run-on text), BM25, dense and hybrid retrieval, the fallback path, extractive answers, abstention, the mocked LLM path and the API.
 
 ---
 
