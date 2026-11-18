@@ -61,6 +61,26 @@ def test_split_sentences():
     assert len(split_sentences("Rent is Rs 5.5k. Pay by the 5th. Done!")) == 3
 
 
+def test_split_sentences_keeps_abbreviations_and_initials():
+    # Titles, Indian rupee amounts, and initials must not be treated as sentence ends.
+    assert split_sentences("The late fee is Rs. 200 per day. Pay by the 5th.") == [
+        "The late fee is Rs. 200 per day.",
+        "Pay by the 5th.",
+    ]
+    assert split_sentences("Please contact Dr. Sharma at the clinic. Bring a photo ID.") == [
+        "Please contact Dr. Sharma at the clinic.",
+        "Bring a photo ID.",
+    ]
+    assert split_sentences("The office is in St. Mary's wing. Bring a photo ID.") == [
+        "The office is in St. Mary's wing.",
+        "Bring a photo ID.",
+    ]
+    assert split_sentences("A. Kumar joined Meridian Tech in June. He starts on Monday.") == [
+        "A. Kumar joined Meridian Tech in June.",
+        "He starts on Monday.",
+    ]
+
+
 def test_text_upload_pages():
     assert extract_pages("a.txt", b"one\n\ntwo") == ["one two"]
     assert extract_pages("a.txt", b"p1\fp2") == ["p1", "p2"]

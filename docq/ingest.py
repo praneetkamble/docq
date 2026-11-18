@@ -5,6 +5,25 @@ import re
 from dataclasses import dataclass, asdict
 
 _SENT = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"'(])")
+# Do not treat these as sentence ends when a new sentence would otherwise start.
+# "Rs." is included because Indian handbooks often write amounts as "Rs. 200".
+_ABBREV = {
+    "mr", "mrs", "ms", "dr", "prof", "sr", "jr", "st", "mt",
+    "shri", "smt", "sri", "rs",
+    "inc", "ltd", "pvt", "co", "corp", "llc", "llp",
+    "vs", "etc", "fig", "vol", "dept", "approx", "no", "p", "pp",
+    "e.g", "i.e",
+}
+_INITIALS = re.compile(r"(?:[A-Z]\.)+[A-Z]?\.?$")
+
+
+def _ends_with_abbrev(fragment: str) -> bool:
+    tok = fragment.split()[-1] if fragment.split() else ""
+    if not tok:
+        return False
+    if tok.rstrip(".!?").lower() in _ABBREV:
+        return True
+    return bool(_INITIALS.fullmatch(tok))
 
 
 @dataclass
@@ -33,7 +52,16 @@ def clean(text: str) -> str:
 
 
 def split_sentences(text: str) -> list[str]:
-    return [s.strip() for s in _SENT.split(text) if s.strip()]
+    parts = [s.strip() for s in _SENT.split(text) if s.strip()]
+    if len(parts) <= 1:
+        return parts
+    merged = [parts[0]]
+    for part in parts[1:]:
+        if _ends_with_abbrev(merged[-1]):
+            merged[-1] = f"{merged[-1]} {part}"
+        else:
+            merged.append(part)
+    return merged
 
 
 def _split_long(sentence: str, max_words: int) -> list[str]:
